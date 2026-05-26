@@ -4,63 +4,109 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>26 Mission Brief</title>
+<title>Mission Briefing</title>
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-body{
-    background:black;
-    overflow-x:hidden;
-    font-family:sans-serif;
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:black;
+  font-family:sans-serif;
 }
 
 .container{
-    display:flex;
-    overflow-x:auto;
-   
-    scroll-snap-type:x mandatory;
-   
-    width:100vw;
-    height:100vh;
+  display:flex;
+  width:100%;
+  height:100%;
+  overflow-x:auto;
 
-    -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
 
-    scroll-behavior:smooth;}
+  -webkit-overflow-scrolling:touch;
 
-.slide{
-    min-width:100vw;
-    height:100vh;
+  overscroll-behavior-x:contain;
 
-    scroll-snap-align:center;
-    scroll-snap-stop:always;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    padding:20px;}
-
-.slide img{
-    width:90%;
-    max-width:30px;
-
-    border-radius:20px;
-
-    box-shadow:0 0 30px rgba(255,255,255,0.15);
-
-    pointer-events:none;
+  scroll-padding-left:0;
 }
 
-audio{
-    width:90%;
-    margin-top:20px;
+.container::-webkit-scrollbar{
+  display:none;
+}
+
+.slide{
+  min-width:100vw;
+  width:100vw;
+  height:100vh;
+
+  flex-shrink:0;
+
+  scroll-snap-align:center;
+  scroll-snap-stop:always;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  position:relative;
+
+  background:black;
+
+  overflow:hidden;
+}
+
+video{
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  background:black;
+
+  display:block;
+
+  flex-shrink:0;
+
+  transform:translateZ(0);
+
+  margin: auto;
+}
+
+.swipe-hint{
+  position:absolute;
+
+  top:65%;
+  left:50%;
+
+  transform:translate(-50%, -50%);
+
+  color:white;
+
+  font-size:20px;
+  font-weight:bold;
+
+  background:rgba(0,0,0,0.6);
+
+  padding:14px 22px;
+
+  border-radius:40px;
+
+  opacity:0;
+  transition:0.3s;
+
+  text-align:center;
+
+  pointer-events:none;
+
+  white-space:nowrap;
 }
 
 </style>
@@ -70,57 +116,80 @@ audio{
 
 <div class="container">
 
-    <div class="slide">
-        <img src="26Mission_Brief01.jpg">
-        <audio controls>
-            <source src="26Mission_Briefing_1.mp3" type="audio/mpeg">
-        </audio>
-    </div>
+  <!-- Briefing card 1 -->
+  <section class="slide">
+    <video controls playsinline preload="metadata">
+      <source src="Mission_Brief_01_0526.mp4" type="video/mp4">
+    </video>
 
-    <div class="slide">
-        <img src="26Mission_Brief02.jpg">
-        <audio controls>
-            <source src="26Mission_Briefing_2.mp3" type="audio/mpeg">
-        </audio>
+    <div class="swipe-hint">
+      ← NEXT BRIEFING →
     </div>
+  </section>
 
-    <div class="slide">
-        <img src="26Mission_Brief03.jpg">
-        <audio controls>
-            <source src="26Mission_Briefing_3.mp3" type="audio/mpeg">
-        </audio>
-    </div>
+  <!-- Briefing card 2 -->
+  <section class="slide">
+    <video controls playsinline preload="metadata">
+      <source src="Mission_Brief_02_0526.mp4" type="video/mp4">
+    </video>
 
-    <div class="slide">
-        <img src="26Mission_Brief04.jpg">
-        <audio controls>
-            <source src="26Mission_Briefing_4.mp3" type="audio/mpeg">
-        </audio>
+    <div class="swipe-hint">
+      ← NEXT BRIEFING →
     </div>
+  </section>
 
-    <div class="slide">
-        <img src="26Mission_Brief05.jpg">
-        <audio controls>
-            <source src="26Mission_Briefing_5.mp3" type="audio/mpeg">
-        </audio>
+  <!-- Briefing card 3 -->
+  <section class="slide">
+    <video controls playsinline preload="metadata">
+      <source src="Mission_Brief_03_0526.mp4" type="video/mp4">
+    </video>
+
+    <div class="swipe-hint">
+      ← NEXT BRIEFING →
     </div>
+  </section>
+
+  <!-- Briefing card 4 -->
+  <section class="slide">
+    <video controls playsinline preload="metadata">
+      <source src="Mission_Brief_04_0526.mp4" type="video/mp4">
+    </video>
+
+    <div class="swipe-hint">
+      ← NEXT BRIEFING →
+    </div>
+  </section>
+
+  <!-- Briefing card 5 -->
+  <section class="slide">
+    <video controls playsinline preload="metadata">
+      <source src="Mission_Brief_05_0526.mp4" type="video/mp4">
+    </video>
+
+    <div class="swipe-hint">
+      END OF BRIEFING
+    </div>
+  </section>
 
 </div>
 
 <script>
 
-const audios = document.querySelectorAll("audio");
+const videos = document.querySelectorAll("video");
 
-audios.forEach(audio => {
-    audio.addEventListener("play", () => {
+videos.forEach(video => {
 
-        audios.forEach(otherAudio => {
-            if(otherAudio !== audio){
-                otherAudio.pause();
-            }
-        });
+  const hint =
+    video.parentElement.querySelector(".swipe-hint");
 
-    });
+  video.addEventListener("ended", () => {
+    hint.style.opacity = "1";
+  });
+
+  video.addEventListener("play", () => {
+    hint.style.opacity = "0";
+  });
+
 });
 
 </script>
