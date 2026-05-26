@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>26 Mission Brief</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:black;
+    overflow-x:hidden;
+    font-family:sans-serif;
+}
+
+.container{
+    display:flex;
+    overflow-x:auto;
+   
+    scroll-snap-type:x mandatory;
+   
+    width:100vw;
+    height:100vh;
+
+    -webkit-overflow-scrolling:touch;
+
+    scroll-behavior:smooth;}
+
+.slide{
+    min-width:100vw;
+    height:100vh;
+
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;}
+
+.slide img{
+    width:90%;
+    max-width:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 0 30px rgba(255,255,255,0.15);
+
+    pointer-events:none;
+}
+
+audio{
+    width:90%;
+    margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="slide">
+        <img src="26Mission_Brief01.jpg">
+        <audio controls>
+            <source src="26Mission_Briefing_1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="slide">
+        <img src="26Mission_Brief02.jpg">
+        <audio controls>
+            <source src="26Mission_Briefing_2.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="slide">
+        <img src="26Mission_Brief03.jpg">
+        <audio controls>
+            <source src="26Mission_Briefing_3.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="slide">
+        <img src="26Mission_Brief04.jpg">
+        <audio controls>
+            <source src="26Mission_Briefing_4.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="slide">
+        <img src="26Mission_Brief05.jpg">
+        <audio controls>
+            <source src="26Mission_Briefing_5.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+</div>
+
+<script>
+
+const audios = document.querySelectorAll("audio");
+
+audios.forEach(audio => {
+    audio.addEventListener("play", () => {
+
+        audios.forEach(otherAudio => {
+            if(otherAudio !== audio){
+                otherAudio.pause();
+            }
+        });
+
+    });
+});
+
+</script>
+
+</body>
+</html>
